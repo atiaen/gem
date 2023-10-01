@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.ga_excersie_attemp1.common.HillClimber;
 import com.ga_excersie_attemp1.common.StringBasedGA;
 
 public class App {
@@ -54,6 +55,9 @@ public class App {
     //If you want to use a hill climber to compare results instead send in args
     if (args.length != 0 && args[0].equals("Hill")) {
       System.out.println("Testing for args");
+      target = App.appProps.getProperty("ga_target");
+      HillClimber climber =  new HillClimber(gaType, target);
+      climber.doHillClimibing();
     }
 
   }

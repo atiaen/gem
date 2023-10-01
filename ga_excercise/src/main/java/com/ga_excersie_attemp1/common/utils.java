@@ -68,8 +68,6 @@ public class utils {
     }
 
     public static Population generateInitialPopulation() {
-        String ALLCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+=-[]{}|;’:\",./<>?"
-                + " ";
 
         List<Individual> individuals = new ArrayList<Individual>();
 
@@ -77,17 +75,18 @@ public class utils {
         Integer populationSize = App.populationSize;
 
         Integer targetLength = target.length();
-        Random randomGenerator = new Random();
 
         for (int i = 0; i < populationSize; i++) {
             Individual newIndividual = new Individual();
             newIndividual.setIndividualType(1);
 
-            for (int j = 0; j < targetLength; j++) {
-                int indexOf = randomGenerator.nextInt(ALLCHARS.length());
-                Character character = ALLCHARS.charAt(indexOf);
-                newIndividual.setIndividualString(newIndividual.getIndividualString() + character);
-            }
+            String newString = generateRandomString(targetLength);
+            newIndividual.setIndividualString(newString);
+            // for (int j = 0; j < targetLength; j++) {
+            //     int indexOf = randomGenerator.nextInt(ALLCHARS.length());
+            //     Character character = ALLCHARS.charAt(indexOf);
+            //     newIndividual.setIndividualString(newIndividual.getIndividualString() + character);
+            // }
 
             // System.out.print(newIndividual.individualString+", ");
             individuals.add(newIndividual);
@@ -157,8 +156,7 @@ public class utils {
     }
 
     public static Individual mutateIndividual(Individual in) {
-        String ALLCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+=-[]{}|;’:\",./<>?"
-                + " ";
+        String ALLCHARS = returnAllCharacters();
         String individualString = in.getIndividualString();
 
         for (int i = 0; i < individualString.length(); i++) {
@@ -194,4 +192,26 @@ public class utils {
                 .getAsInt();
     }
 
+
+    public static String returnAllCharacters(){
+        String ALLCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+=-[]{}|;’:\",./<>?"
+        + " ";
+        return ALLCHARS;
+    }
+
+    public static String generateRandomString(Integer length){
+        // Integer targetLength = target.length();
+        Random randomGenerator = new Random();
+        String generated = "";
+
+        String all = returnAllCharacters();
+
+        for (int j = 0; j < length; j++) {
+            int indexOf = randomGenerator.nextInt(all.length());
+            Character character = all.charAt(indexOf);
+            generated = generated + character;
+        }
+
+        return generated;
+    }
 }

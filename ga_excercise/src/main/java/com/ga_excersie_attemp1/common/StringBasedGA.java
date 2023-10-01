@@ -63,7 +63,7 @@ public class StringBasedGA {
                 System.out.println(String.format("Score: " + mostFitIndividual.getIndividualFitness()));
             }
 
-            // If about conditions fail. Generate another population based on previous population and set new pop to current pop.
+            // If above conditions fail. Generate another population based on previous population and set new pop to current pop.
             Population offsPopulation = utils.createNewGeneration(p);
             p = offsPopulation;
             
