@@ -5,7 +5,7 @@
 
   <groupId>com.gem</groupId>
   <artifactId>gem</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>gem</name>
@@ -43,6 +43,7 @@
 		<version>1.18.30</version>
 		<scope>provided</scope>
 	</dependency>
+
   </dependencies>
 
   <build>
@@ -56,6 +57,16 @@
           <target>${java.version}</target>
         </configuration>
       </plugin>
+       <!-- <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+                <goals>
+                    <goal>java</goal>
+                </goals>
+                <configuration>
+                    <mainClass>pack.App</mainClass>
+                </configuration>
+        </plugin> -->
     </plugins>
   </build>
 </project>
