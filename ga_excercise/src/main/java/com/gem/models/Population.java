@@ -1,10 +1,9 @@
-package com.ga_excersie_attemp1.models;
+package com.gem.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import com.ga_excersie_attemp1.App;
+import com.gem.App;
 
 import lombok.Data;
 

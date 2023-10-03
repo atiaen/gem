@@ -1,12 +1,12 @@
-package com.ga_excersie_attemp1.common;
+package com.gem.common;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.ga_excersie_attemp1.App;
-import com.ga_excersie_attemp1.models.Individual;
-import com.ga_excersie_attemp1.models.Population;
+import com.gem.App;
+import com.gem.models.Individual;
+import com.gem.models.Population;
 
 public class utils {
 

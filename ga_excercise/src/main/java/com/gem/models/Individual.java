@@ -1,6 +1,6 @@
-package com.ga_excersie_attemp1.models;
+package com.gem.models;
 
-import com.ga_excersie_attemp1.App;
+import com.gem.App;
 
 import lombok.Data;
 

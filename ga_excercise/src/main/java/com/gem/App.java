@@ -1,12 +1,12 @@
-package com.ga_excersie_attemp1;
+package com.gem;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.ga_excersie_attemp1.common.HillClimber;
-import com.ga_excersie_attemp1.common.StringBasedGA;
+import com.gem.common.HillClimber;
+import com.gem.common.StringBasedGA;
 
 public class App {
 
@@ -53,10 +53,11 @@ public class App {
     }
 
     //If you want to use a hill climber to compare results instead send in args
-    if (args.length != 0 && args[0].equals("Hill")) {
+    if (args.length != 0 && args[0].equals("Hill") && !args[1].isEmpty()) {
       System.out.println("Testing for args");
       target = App.appProps.getProperty("ga_target");
-      HillClimber climber =  new HillClimber(gaType, target);
+      Integer numOfNeighbors = Integer.valueOf(args[1]);
+      HillClimber climber =  new HillClimber(gaType, target,numOfNeighbors);
       climber.doHillClimibing();
     }
 
