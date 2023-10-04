@@ -10,15 +10,13 @@ public class HillClimber {
     String target = "";
     String currentState = "";
     float targetScore = 0f;
-    int numberOfNeighbors;
 
-    public HillClimber(String type, String target, int noOfNeighbors) {
+    public HillClimber(String type, String target) {
         // System.out.println(target);
         // System.out.println(type);
         this.hillClimberType = type;
         this.targetScore = target.length() * 0.1f;
         this.target = target;
-        this.numberOfNeighbors = noOfNeighbors;
     }
 
     public void doHillClimibing() {
@@ -30,7 +28,7 @@ public class HillClimber {
             String bestState = currentState;
             Integer count = 0;
 
-            while (true) {
+            while (bestScore > 0) {
                 count++;
                 System.out.println("Current State:   " + currentState);
                 System.out.println("Current Count:   " + count);
@@ -41,14 +39,14 @@ public class HillClimber {
                     break;
                 }
 
-                // String newS = this.generateNewState(currentState);
-                List<String> newNeighbors = this.randomNeighbors(numberOfNeighbors);
-                Integer bestNew = this.findBestNeighborInList(newNeighbors);
-                String newS = newNeighbors.get(bestNew);
+                String newS = this.generateNewState(currentState);
+                // List<String> newNeighbors = this.randomNeighbors(numberOfNeighbors);
+                // Integer bestNew = this.findBestNeighborInList(newNeighbors);
+                // String newS = newNeighbors.get(bestNew);
                 System.out.println("New State:   " + newS);
 
                 if (newS.equals(currentState)) {
-                    newS = newNeighbors.get(bestNew + 1);
+                    newS = utils.generateRandomString(target.length());
                 }
 
                 float newScore = this.scoreString(newS);
@@ -79,11 +77,9 @@ public class HillClimber {
 
     public void setInitialState() {
 
-        // Integer targetLength = target.length();
-        List<String> neighs = this.randomNeighbors(numberOfNeighbors);
-        Integer bestIndex = this.findBestNeighborInList(neighs);
-        this.currentState = neighs.get(bestIndex);
-        // this.currentState = utils.generateRandomString(targetLength);
+        Integer targetLength = target.length();
+ 
+        this.currentState = utils.generateRandomString(targetLength);
         // System.out.println(currentState);
 
     }
@@ -118,29 +114,5 @@ public class HillClimber {
         return newState;
     }
 
-    public List<String> randomNeighbors(Integer numberOfNeighbors) {
-        List<String> generatedNeighbors = new ArrayList<>(numberOfNeighbors);
 
-        for (int i = 0; i < numberOfNeighbors; i++) {
-            String generatedString = utils.generateRandomString(target.length());
-            generatedNeighbors.add(generatedString);
-        }
-
-        return generatedNeighbors;
-    }
-
-    public Integer findBestNeighborInList(List<String> neighbors) {
-        Float bestScore = 0f;
-        Integer bestNeighborIndex = 0;
-
-        for (int i = 0; i < neighbors.size(); i++) {
-            Float score = this.scoreString(neighbors.get(i));
-            if (score < bestScore) {
-                bestScore = score;
-                bestNeighborIndex = i;
-            }
-        }
-
-        return bestNeighborIndex;
-    }
 }

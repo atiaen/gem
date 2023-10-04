@@ -3,6 +3,7 @@ package com.gem;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import com.gem.common.HillClimber;
@@ -20,13 +21,11 @@ public class App {
   public static Integer maxGenerations = 0;
   public static Float crossOverRate = 0f;
   public static Float mutationRate = 0f;
-  static final String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-  static final String appConfigPath = rootPath + "application.properties";
-
   public static void main(String[] args) throws FileNotFoundException, IOException {
 
     // Load the values from path into properties object
-    appProps.load(new FileInputStream(appConfigPath));
+    InputStream stream = App.class.getClassLoader().getResourceAsStream("application.properties");
+    appProps.load(stream);
 
     // Load ga type and evalscore from appProps
     String gaType = appProps.getProperty("ga_representation");
@@ -53,11 +52,10 @@ public class App {
     }
 
     //If you want to use a hill climber to compare results instead send in args
-    if (args.length != 0 && args[0].equals("Hill") && !args[1].isEmpty()) {
+    if (args.length != 0 && args[0].equals("Hill") ) {
       System.out.println("Testing for args");
       target = App.appProps.getProperty("ga_target");
-      Integer numOfNeighbors = Integer.valueOf(args[1]);
-      HillClimber climber =  new HillClimber(gaType, target,numOfNeighbors);
+      HillClimber climber =  new HillClimber(gaType, target);
       climber.doHillClimibing();
     }
 

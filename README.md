@@ -1,9 +1,11 @@
-**GEM**
+(Please ensure you have maven installed before hand)
+How to run the GA 
+ - Open project in terminal of choice
+ - Navigate to folder where **pom.xml** is located.
+ - Modify application.properties file if needed.
+ - Run `mvn package` to build project;
+ - Run `java -cp target/gem-1.0.jar com.gem.App` to run the project and let the magic 
 
-Welcome to Gem. A mini Genetic Algorithm Framework, I made for a course I'm doing for my masters degree.
-
-It currently works for string based GA's only right now but I will probably be expanded to numbers later on.
-
-This document might get updated later but right now. I'm just storing it on my repo.
-
-
+How to run Hill Climber
+ - Same as Hill climber only difference is adding Hill after `com.gem.App`
+ - Target cli should look like this `java -cp target/gem-1.0.jar com.gem.App Hill`
