@@ -37,7 +37,7 @@ public class Individual {
 
         for(int i= 0;i < list.length; i++){
             if(list[i] == App.target.charAt(i)){
-                this.individualFitness = this.individualFitness + 0.1f;
+                this.individualFitness = this.individualFitness + App.evalScore;
             }
         }
         return individualFitness;

@@ -102,21 +102,21 @@ public class utils {
     public static Individual[] generateOffSpring(Individual p1, Individual p2) {
         Individual[] children = new Individual[2];
 
-        // recombo part
-        // use probability to determine if we do recombo:
+        // crossover occurs here
         Random rand = new Random();
-        float randProb = rand.nextFloat(); // will make random float between 0 and 1
-        // System.out.println(randProb);
-        if (randProb <= App.crossOverRate) { // means we are doing rombination
-            int randInt = rand.nextInt(p1.getIndividualString().length()); // will be used to determine where to do
-                                                                           // crossover
-            // make sure to make copy and not change the parent itself!!
+        float randProb = rand.nextFloat();
+
+        if (randProb <= App.crossOverRate) { // check if random generated value is less than or equal to our crossover rate
+            int randInt = rand.nextInt(p1.getIndividualString().length());
 
             String p1Str = p1.getIndividualString();
             String p2Str = p2.getIndividualString();
+
+            //Generating child strings occurs here
             String child1Str = p1Str.substring(0, randInt) + p2Str.substring(randInt);
             String child2Str = p2Str.substring(0, randInt) + p1Str.substring(randInt);
 
+            //Instantiate 2 new children here
             Individual child1 = new Individual();
             child1.setIndividualString(child1Str);
             child1.setIndividualType(1);
@@ -125,14 +125,18 @@ public class utils {
             child2.setIndividualString(child2Str);
             child2.setIndividualType(1);
 
+            //Mutation occurs here
             Random mutateGen = new Random();
             float probToMutate = mutateGen.nextFloat();
 
 
+            //Check if probabilty to mutate is less than or equal to our mutation rate
             if (probToMutate <= App.mutationRate) {
 
+                //Generate a random number between 1 and 2 
                 int chanceToMutateChildren = generateRandomNumberWithinRange(1, 3);
 
+                //Choose which child to mutate.
                 if (chanceToMutateChildren == 1) {
                     child1 = mutateIndividual(child1);
                     // System.out.println("Mutated here child: " + chanceToMutateChildren);
@@ -155,6 +159,7 @@ public class utils {
         return children;
     }
 
+    //Mutation happens here
     public static Individual mutateIndividual(Individual in) {
         String ALLCHARS = returnAllCharacters();
         String individualString = in.getIndividualString();
@@ -191,7 +196,6 @@ public class utils {
                 .findFirst()
                 .getAsInt();
     }
-
 
     public static String returnAllCharacters(){
         String ALLCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+=-[]{}|;’:\",./<>?"

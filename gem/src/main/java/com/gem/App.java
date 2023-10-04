@@ -1,6 +1,5 @@
 package com.gem;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,10 +51,11 @@ public class App {
     }
 
     //If you want to use a hill climber to compare results instead send in args
-    if (args.length != 0 && args[0].equals("Hill") ) {
+    if (args.length != 0 && args[0].equals("Hill")&& !args[1].isEmpty() ) {
       System.out.println("Testing for args");
       target = App.appProps.getProperty("ga_target");
-      HillClimber climber =  new HillClimber(gaType, target);
+      Integer neighborHoodSize = Integer.parseInt(args[1]);
+      HillClimber climber =  new HillClimber(gaType, target,neighborHoodSize);
       climber.doHillClimibing();
     }
 
