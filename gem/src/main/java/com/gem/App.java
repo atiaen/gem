@@ -62,11 +62,12 @@ public class App {
       climber.doHillClimibing();
     }
 
-    if (args.length != 0 && args[0].equals("Random")) {
+    if (args.length != 0 && args[0].equals("Random") && !args[1].isEmpty()) {
       target = App.appProps.getProperty("ga_target");
+      Integer numberOfIterations = Integer.parseInt(args[1]);
       String randomStart = utils.generateRandomString(target.length());
       String ALLCHARS = utils.returnAllCharacters();
-      for (int i = 0; i < 4500; i++) {
+      for (int i = 0; i < numberOfIterations; i++) {
         System.out.println(randomStart);
         Random ran = new Random();
         Integer index = ran.nextInt(target.length());
