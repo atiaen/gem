@@ -4,9 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.Random;
 
 import com.gem.common.HillClimber;
 import com.gem.common.StringBasedGA;
+import com.gem.common.utils;
 
 public class App {
 
@@ -20,6 +22,7 @@ public class App {
   public static Integer maxGenerations = 0;
   public static Float crossOverRate = 0f;
   public static Float mutationRate = 0f;
+
   public static void main(String[] args) throws FileNotFoundException, IOException {
 
     // Load the values from path into properties object
@@ -50,15 +53,39 @@ public class App {
       gBasedGA.runGA();
     }
 
-    //If you want to use a hill climber to compare results instead send in args
-    if (args.length != 0 && args[0].equals("Hill")&& !args[1].isEmpty() ) {
+    // If you want to use a hill climber to compare results instead send in args
+    if (args.length != 0 && args[0].equals("Hill") && !args[1].isEmpty()) {
       System.out.println("Testing for args");
       target = App.appProps.getProperty("ga_target");
       Integer neighborHoodSize = Integer.parseInt(args[1]);
-      HillClimber climber =  new HillClimber(gaType, target,neighborHoodSize);
+      HillClimber climber = new HillClimber(gaType, target, neighborHoodSize);
       climber.doHillClimibing();
     }
 
+    if (args.length != 0 && args[0].equals("Random")) {
+      target = App.appProps.getProperty("ga_target");
+      String randomStart = utils.generateRandomString(target.length());
+      String ALLCHARS = utils.returnAllCharacters();
+      for (int i = 0; i < 4500; i++) {
+        System.out.println(randomStart);
+        Random ran = new Random();
+        Integer index = ran.nextInt(target.length());
+        if (randomStart.charAt(index) != target.charAt(index)) {
+          Random randoms = new Random();
+          Integer charGen = randoms.nextInt(ALLCHARS.length());
+          char randomCharacter = ALLCHARS.charAt(charGen);
+          String newS = randomStart.substring(0, index) + String.valueOf(randomCharacter)
+              + randomStart.substring(index + 1, randomStart.length());
+          randomStart = newS;
+        }
+
+        if (randomStart.equals(target)) {
+          System.out.println("We've found a solution!: " + randomStart);
+          System.out.println("Count:" + i);
+          break;
+        }
+      }
+    }
   }
 
 }
