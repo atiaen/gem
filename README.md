@@ -1,8 +1,9 @@
 (Please ensure you have maven installed before hand)
+
 How to run the GA 
  - Open project in terminal of choice
- - Navigate to folder where **pom.xml** is located.
- - Modify application.properties file if needed.
+ - Navigate to folder where `pom.xml` is located.
+ - Modify `application.properties` file if needed.
  - Run `mvn clean install` to add needed dependencies
  - Run `mvn package` to build project;
  - Run `java -cp target/gem-1.0.jar com.gem.App` to run the project and let the magic happen
@@ -16,11 +17,11 @@ How to run Hill Climber
  - Target cli should look like this `java -cp target/gem-1.0.jar com.gem.App Random 4500`
 
 
- You can also run it with VSCODE by adding having the following extension installed
+ You can also run it with VSCode by having the following extension installed
  - Extension Pack for java (https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
- - Once its installed properly open up the App.java file and scroll to the `main` function
- - There should be a small `Run|Debug` text over it. Click on it and it should start working.
- - If you want to use the Hill Climber or Random Solution. Create a folder called .vscode and add create a file called launch.json inside
+ - Once its installed properly open up the `App.java` file and scroll to the `main` function
+ - There should be a small `Run | Debug` text over it. Click on any one of them and it should start working.
+ - If you want to use the Hill Climber or Random Solution. Create a folder called `.vscode` and add create a file called `launch.json` inside
  - The file should look like this:
 ```json
 {
@@ -47,5 +48,4 @@ How to run Hill Climber
     ]
 }
 ```
- - Once that is done add `Hill` or `Random` as the first element in your args array and any whole number larger than 1 as the second element
- in your args array and run it.
+ - Once that is done add `Hill` or `Random` as the first element in your `args` array and any whole number larger than 1 as the second element in your args array and run it.

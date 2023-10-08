@@ -44,9 +44,10 @@ public class StringBasedGA {
                 mostFitIndividual = fittestIndividualInCurrentGen;
             }
 
-            System.out.println("Target:               " + App.target.toString());
-            System.out.println("Best Individual:      " + mostFitIndividual.getIndividualString());
-            System.out.println("Current Generation:      " + generationCount);
+            // System.out.println("Target:               " + App.target.toString());
+            System.out.println(p.Individuals);
+            // System.out.println("Best Individual:      " + mostFitIndividual.getIndividualString());
+            // System.out.println("Current Generation:      " + generationCount);
 
             // If we find the target stop loop and print out here
             if (fittestIndividualInCurrentGen.getIndividualString().equals(App.target)) {

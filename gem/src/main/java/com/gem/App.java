@@ -39,6 +39,7 @@ public class App {
 
     // Check gatype can be either string representaion or binary based
     // This section is if you want to use a GA within Gem
+    long start = System.currentTimeMillis();
     if (gaType.equals("StringBased") && args.length == 0) {
       target = App.appProps.getProperty("ga_target");
       populationSize = Integer.parseInt(popSize);
@@ -68,7 +69,9 @@ public class App {
       String randomStart = utils.generateRandomString(target.length());
       String ALLCHARS = utils.returnAllCharacters();
       for (int i = 0; i < numberOfIterations; i++) {
-        System.out.println(randomStart);
+        System.out.println("Solution:" + randomStart);
+        System.out.println("Count:" + i);
+        
         Random ran = new Random();
         Integer index = ran.nextInt(target.length());
         if (randomStart.charAt(index) != target.charAt(index)) {
@@ -87,6 +90,10 @@ public class App {
         }
       }
     }
+  
+    long end = System.currentTimeMillis(); 
+
+    System.out.println("Elapsed Time in milli seconds: "+ (end-start));
   }
 
 }
