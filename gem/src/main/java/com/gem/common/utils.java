@@ -10,63 +10,75 @@ import com.gem.models.Population;
 
 public class utils {
 
+    //Tournament selection to pit multiple individuals against each other
     public static Individual tournamentSelection(List<Individual> individuals) {
 
         Individual winningIndividual;
         Random randGen = new Random();
 
+        //Select two random indexes from list
         Integer parent1Index = randGen.nextInt(individuals.size() - 1);
         Integer parent2Index = randGen.nextInt(individuals.size() - 1);
 
+        //If both indexes are the same increase by 1
         if (parent1Index == parent2Index) {
             parent2Index += 1;
         }
 
+        //Get the parents by index
         Individual parent1 = individuals.get(parent1Index);
         Individual parent2 = individuals.get(parent2Index);
 
+        //Compare parent 1 against 2
         if (parent1.getInFitness() > parent2.getInFitness()) {
             winningIndividual = parent1;
         } else {
             winningIndividual = parent2;
         }
 
+        //If one is better than the other return that individual
         return winningIndividual;
 
     }
 
+    //Generate a new population here
     public static Population createNewGeneration(Population oldpop) {
+        //Initialize list to be based on population size
         List<Individual> individuals = new ArrayList<Individual>(App.populationSize);
 
+        //Increment loop by 2 
         for (int i = 0; i < App.populationSize; i += 2) {
             Individual in1;
             Individual in2;
 
+            //Choose two individuals by tournament selection
             in1 = tournamentSelection(oldpop.Individuals);
             in2 = tournamentSelection(oldpop.Individuals);
 
+            //If either parent is the same as the other,reselect another individual
             if (in1.equals(in2) || in2.equals(in1)) {
                 in2 = tournamentSelection(oldpop.Individuals);
             }
 
+            //Generate 2 offspring from parents
             Individual[] generatedOffspring = generateOffSpring(in1, in2);
             Individual child1 = generatedOffspring[0];
             Individual child2 = generatedOffspring[1];
 
+            //Add offspring to list
             individuals.add(i, child1);
             individuals.add(i + 1, child2);
 
-            // System.out.println(child1);
-            // System.out.println(child2);
-
         }
 
+        //Return new population
         Population newPopulation = new Population(individuals);
-        // newPopulation.Individuals = individuals;
 
         return newPopulation;
     }
 
+
+    //Generate a random inital population
     public static Population generateInitialPopulation() {
 
         List<Individual> individuals = new ArrayList<Individual>();
@@ -99,6 +111,8 @@ public class utils {
 
     }
 
+
+    //Take two parents and perfom a cross over
     public static Individual[] generateOffSpring(Individual p1, Individual p2) {
         Individual[] children = new Individual[2];
 
@@ -106,13 +120,14 @@ public class utils {
         Random rand = new Random();
         float randProb = rand.nextFloat();
 
-        if (randProb <= App.crossOverRate) { // check if random generated value is less than or equal to our crossover rate
+        // Check if randomly generated value is less than or equal to our crossover rate
+        if (randProb <= App.crossOverRate) {
             int randInt = rand.nextInt(p1.getIndividualString().length());
 
             String p1Str = p1.getIndividualString();
             String p2Str = p2.getIndividualString();
 
-            //Generating child strings occurs here
+            //Crossover of child strings occurs here
             String child1Str = p1Str.substring(0, randInt) + p2Str.substring(randInt);
             String child2Str = p2Str.substring(0, randInt) + p1Str.substring(randInt);
 
@@ -139,12 +154,10 @@ public class utils {
                 //Choose which child to mutate.
                 if (chanceToMutateChildren == 1) {
                     child1 = mutateIndividual(child1);
-                    // System.out.println("Mutated here child: " + chanceToMutateChildren);
-                    // System.out.println("Mutated here child: " + child1);
+                  
                 }else if (chanceToMutateChildren == 2) {
                     child2 = mutateIndividual(child2);
-                    // System.out.println("Mutated here child: " + chanceToMutateChildren);
-                    // System.out.println("Mutated here child: " + child2);
+                   
                 }
 
             }
@@ -190,6 +203,8 @@ public class utils {
 
     }
 
+
+    //Helper functions below
     public static int generateRandomNumberWithinRange(int min, int max) {
         Random random = new Random();
         return random.ints(min, max)

@@ -24,39 +24,49 @@ public class HillClimber {
     public void doHillClimibing() {
 
         if (this.hillClimberType.equals("StringBased")) {
+            //Set our initial climbing state
             this.setInitialState();
 
+            //Score inital state
             Float bestScore = this.scoreString(currentState);
+            
             String bestState = currentState;
             Integer count = 0;
 
+            //While target has not been reached
             while (true) {
                 count++;
                 System.out.println("Current State:   " + currentState);
                 System.out.println("Current Count:   " + count);
-                // System.out.println("Target State: " + target);
 
+                //Stopping condition, checking if our target has been reached
                 if (currentState.equals(target)) {
                     System.out.println("Acheived Target:   " + currentState);
                     break;
                 }
 
-                // String newS = this.generateNewState(currentState);
+                //Generate new neighbours based on current position/state
                 List<String> newNeighbors = this.generateNeighbors(currentState);
+                //Find the best neighour index from the generated neighbourhood
                 Integer bestNew = this.findBestNeighbourInNeighborhood(newNeighbors);
+                //Get that neighbour
                 String newS = newNeighbors.get(bestNew);
                 System.out.println("New State:   " + newS);
 
+                //Check if current state is the same as new state. if true use next index
                 if (newS.equals(currentState)) {
                     newS = newNeighbors.get(bestNew + 1);
                 }
 
+                //Score our new state
                 float newScore = this.scoreString(newS);
 
                 System.out.println("Best State:   " + bestState);
                 System.out.println("Best Score:   " + bestScore);
                 System.out.println("New Score:   " + newScore);
 
+                //If our new score is better than best score 
+                //Set current state and best score to that values if not everything will repeat again
                 if (newScore < bestScore) {
                     bestScore = newScore;
                     currentState = newS;
@@ -69,13 +79,15 @@ public class HillClimber {
 
     public void setInitialState() {
 
+        //Get length of our target string
         Integer targetLength = target.length();
 
+        //Generate a random string and set inital state to that string
         this.currentState = utils.generateRandomString(targetLength);
-        // System.out.println(currentState);
 
     }
 
+    //Fitness function to score a string. Is done character by character
     public Float scoreString(String s) {
         float score = targetScore;
 
@@ -88,24 +100,8 @@ public class HillClimber {
         return score;
     }
 
-    public String generateNewState(String prevState) {
 
-        String newState = "";
-        String ALLCHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+=-[]{}|;’:\",./<>?"
-                + " ";
-        Integer targetLength = prevState.length();
-
-        for (int i = 0; i < targetLength; i++) {
-            Random randomGenerator = new Random();
-            int index = randomGenerator.nextInt(ALLCHARS.length());
-            char chars = ALLCHARS.charAt(index);
-            String va = String.valueOf(chars);
-            newState = prevState.substring(0, i) + va + prevState.substring(i + 1, targetLength);
-        }
-
-        return newState;
-    }
-
+    //Create a list of neighbours from out current position
     public List<String> generateNeighbors(String currentNeighbor) {
         List<String> neighbors = new ArrayList<>();
         String ALLCHARS = utils.returnAllCharacters();
@@ -137,6 +133,7 @@ public class HillClimber {
         return neighbors;
     }
 
+    //Take a list of neighours and score each one to find the best neighbour by index
     public Integer findBestNeighbourInNeighborhood(List<String> neighbors){
         float bestScore = 0f;
         int bestNeighborIndex = 0;
@@ -151,4 +148,5 @@ public class HillClimber {
 
         return bestNeighborIndex;
     }
+    
 }

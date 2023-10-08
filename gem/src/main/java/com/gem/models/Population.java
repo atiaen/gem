@@ -9,12 +9,16 @@ import lombok.Data;
 
 @Data
 public class Population {
+
+    //Array to track how many individuals exist in a given population
     public List<Individual> Individuals = new ArrayList<Individual>();
     
     public Population(List<Individual> inds){
         this.Individuals = inds;
     }
 
+    //Function to find the best individual in a population by 
+    //checking each individuals fitness and returning the best individual
     public Individual findFittestIndividual() {
 
         Individual fittest = new Individual();
@@ -34,9 +38,5 @@ public class Population {
 
         return fittest;
     }
-
-    // public void evolvePopulation(){
-
-    // }
 
 }

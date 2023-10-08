@@ -63,6 +63,7 @@ public class App {
       climber.doHillClimibing();
     }
 
+    // Random solution can be found here
     if (args.length != 0 && args[0].equals("Random") && !args[1].isEmpty()) {
       target = App.appProps.getProperty("ga_target");
       Integer numberOfIterations = Integer.parseInt(args[1]);

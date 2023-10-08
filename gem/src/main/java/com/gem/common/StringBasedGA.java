@@ -24,11 +24,13 @@ public class StringBasedGA {
         this.mutationRate = mut;
     }
 
+    //Function that runs ga process
     public void runGA() {
 
         // Generate population here
         Population p = utils.generateInitialPopulation();
 
+        //How many generations have elapsed so far
         Integer generationCount = 0;
 
         // Find both fittest and best fit individual in current population
@@ -39,15 +41,16 @@ public class StringBasedGA {
         while (generationCount <= maxGenerations - 1) {
             generationCount++;
 
+            //Return fittest individual in current generation
             fittestIndividualInCurrentGen = p.findFittestIndividual();
+
+            //If fittest individual is better than our most fit change most fit to best fit
             if (fittestIndividualInCurrentGen.getInFitness() > mostFitIndividual.getInFitness()) {
                 mostFitIndividual = fittestIndividualInCurrentGen;
             }
 
-            // System.out.println("Target:               " + App.target.toString());
             System.out.println(p.Individuals);
-            // System.out.println("Best Individual:      " + mostFitIndividual.getIndividualString());
-            // System.out.println("Current Generation:      " + generationCount);
+           
 
             // If we find the target stop loop and print out here
             if (fittestIndividualInCurrentGen.getIndividualString().equals(App.target)) {
@@ -68,7 +71,7 @@ public class StringBasedGA {
             }
 
             // If above conditions fail. Generate another population based on previous
-            // population and set new pop to current pop.
+            // population and set current population to new population.
             Population offsPopulation = utils.createNewGeneration(p);
             p = offsPopulation;
 
