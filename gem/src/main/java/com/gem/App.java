@@ -8,7 +8,7 @@ import java.util.Random;
 
 import com.gem.common.HillClimber;
 import com.gem.common.StringBasedGA;
-import com.gem.common.utils;
+import com.gem.common.StringIndividualUtils;
 
 public class App {
 
@@ -67,8 +67,8 @@ public class App {
     if (args.length != 0 && args[0].equals("Random") && !args[1].isEmpty()) {
       target = App.appProps.getProperty("ga_target");
       Integer numberOfIterations = Integer.parseInt(args[1]);
-      String randomStart = utils.generateRandomString(target.length());
-      String ALLCHARS = utils.returnAllCharacters();
+      String randomStart = StringIndividualUtils.generateRandomString(target.length());
+      String ALLCHARS = StringIndividualUtils.returnAllCharacters();
       for (int i = 0; i < numberOfIterations; i++) {
         System.out.println("Solution:" + randomStart);
         System.out.println("Count:" + i);

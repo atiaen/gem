@@ -11,21 +11,21 @@ import lombok.Data;
 public class Population {
 
     //Array to track how many individuals exist in a given population
-    public List<Individual> Individuals = new ArrayList<Individual>();
+    public List<StringIndividual> Individuals = new ArrayList<StringIndividual>();
     
-    public Population(List<Individual> inds){
+    public Population(List<StringIndividual> inds){
         this.Individuals = inds;
     }
 
     //Function to find the best individual in a population by 
     //checking each individuals fitness and returning the best individual
-    public Individual findFittestIndividual() {
+    public StringIndividual findFittestIndividual() {
 
-        Individual fittest = new Individual();
+        StringIndividual fittest = new StringIndividual();
 
         Float highestScore = 0f;
 
-        for (Individual ind : this.Individuals) {
+        for (StringIndividual ind : this.Individuals) {
 
             // System.out.println(ind);
             Float indScore = ind.getInFitness();

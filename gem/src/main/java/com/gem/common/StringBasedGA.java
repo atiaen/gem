@@ -1,7 +1,7 @@
 package com.gem.common;
 
 import com.gem.App;
-import com.gem.models.Individual;
+import com.gem.models.StringIndividual;
 import com.gem.models.Population;
 
 public class StringBasedGA {
@@ -28,14 +28,14 @@ public class StringBasedGA {
     public void runGA() {
 
         // Generate population here
-        Population p = utils.generateInitialPopulation();
+        Population p = StringIndividualUtils.generateInitialPopulation();
 
         //How many generations have elapsed so far
         Integer generationCount = 0;
 
         // Find both fittest and best fit individual in current population
-        Individual fittestIndividualInCurrentGen = p.findFittestIndividual();
-        Individual mostFitIndividual = p.findFittestIndividual();
+        StringIndividual fittestIndividualInCurrentGen = p.findFittestIndividual();
+        StringIndividual mostFitIndividual = p.findFittestIndividual();
 
         // Loop while our current generation is less than max generations
         while (generationCount <= maxGenerations - 1) {
@@ -72,7 +72,7 @@ public class StringBasedGA {
 
             // If above conditions fail. Generate another population based on previous
             // population and set current population to new population.
-            Population offsPopulation = utils.createNewGeneration(p);
+            Population offsPopulation = StringIndividualUtils.createNewGeneration(p);
             p = offsPopulation;
 
         }

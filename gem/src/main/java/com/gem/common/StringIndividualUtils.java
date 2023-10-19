@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Random;
 
 import com.gem.App;
-import com.gem.models.Individual;
+import com.gem.models.StringIndividual;
 import com.gem.models.Population;
 
-public class utils {
+public class StringIndividualUtils {
 
     //Tournament selection to pit multiple individuals against each other
-    public static Individual tournamentSelection(List<Individual> individuals) {
+    public static StringIndividual tournamentSelection(List<StringIndividual> individuals) {
 
-        Individual winningIndividual;
+        StringIndividual winningIndividual;
         Random randGen = new Random();
 
         //Select two random indexes from list
@@ -26,8 +26,8 @@ public class utils {
         }
 
         //Get the parents by index
-        Individual parent1 = individuals.get(parent1Index);
-        Individual parent2 = individuals.get(parent2Index);
+        StringIndividual parent1 = individuals.get(parent1Index);
+        StringIndividual parent2 = individuals.get(parent2Index);
 
         //Compare parent 1 against 2
         if (parent1.getInFitness() > parent2.getInFitness()) {
@@ -44,12 +44,12 @@ public class utils {
     //Generate a new population here
     public static Population createNewGeneration(Population oldpop) {
         //Initialize list to be based on population size
-        List<Individual> individuals = new ArrayList<Individual>(App.populationSize);
+        List<StringIndividual> individuals = new ArrayList<StringIndividual>(App.populationSize);
 
         //Increment loop by 2 
         for (int i = 0; i < App.populationSize; i += 2) {
-            Individual in1;
-            Individual in2;
+            StringIndividual in1;
+            StringIndividual in2;
 
             //Choose two individuals by tournament selection
             in1 = tournamentSelection(oldpop.Individuals);
@@ -61,9 +61,9 @@ public class utils {
             }
 
             //Generate 2 offspring from parents
-            Individual[] generatedOffspring = generateOffSpring(in1, in2);
-            Individual child1 = generatedOffspring[0];
-            Individual child2 = generatedOffspring[1];
+            StringIndividual[] generatedOffspring = generateOffSpring(in1, in2);
+            StringIndividual child1 = generatedOffspring[0];
+            StringIndividual child2 = generatedOffspring[1];
 
             //Add offspring to list
             individuals.add(i, child1);
@@ -81,7 +81,7 @@ public class utils {
     //Generate a random inital population
     public static Population generateInitialPopulation() {
 
-        List<Individual> individuals = new ArrayList<Individual>();
+        List<StringIndividual> individuals = new ArrayList<StringIndividual>();
 
         String target = App.target;
         Integer populationSize = App.populationSize;
@@ -89,7 +89,7 @@ public class utils {
         Integer targetLength = target.length();
 
         for (int i = 0; i < populationSize; i++) {
-            Individual newIndividual = new Individual();
+            StringIndividual newIndividual = new StringIndividual();
             newIndividual.setIndividualType(1);
 
             String newString = generateRandomString(targetLength);
@@ -113,8 +113,8 @@ public class utils {
 
 
     //Take two parents and perfom a cross over
-    public static Individual[] generateOffSpring(Individual p1, Individual p2) {
-        Individual[] children = new Individual[2];
+    public static StringIndividual[] generateOffSpring(StringIndividual p1, StringIndividual p2) {
+        StringIndividual[] children = new StringIndividual[2];
 
         // crossover occurs here
         Random rand = new Random();
@@ -132,11 +132,11 @@ public class utils {
             String child2Str = p2Str.substring(0, randInt) + p1Str.substring(randInt);
 
             //Instantiate 2 new children here
-            Individual child1 = new Individual();
+            StringIndividual child1 = new StringIndividual();
             child1.setIndividualString(child1Str);
             child1.setIndividualType(1);
 
-            Individual child2 = new Individual();
+            StringIndividual child2 = new StringIndividual();
             child2.setIndividualString(child2Str);
             child2.setIndividualType(1);
 
@@ -173,7 +173,7 @@ public class utils {
     }
 
     //Mutation happens here
-    public static Individual mutateIndividual(Individual in) {
+    public static StringIndividual mutateIndividual(StringIndividual in) {
         String ALLCHARS = returnAllCharacters();
         String individualString = in.getIndividualString();
 
@@ -194,7 +194,7 @@ public class utils {
 
         }
 
-        Individual newIndividual = new Individual();
+        StringIndividual newIndividual = new StringIndividual();
         newIndividual.setIndividualString(individualString);
         newIndividual.setIndividualType(1);
         newIndividual.setIndividualFitness(0f);

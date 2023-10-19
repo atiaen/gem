@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.gem.models.Individual;
 
 public class HillClimber {
 
@@ -83,7 +82,7 @@ public class HillClimber {
         Integer targetLength = target.length();
 
         //Generate a random string and set inital state to that string
-        this.currentState = utils.generateRandomString(targetLength);
+        this.currentState = StringIndividualUtils.generateRandomString(targetLength);
 
     }
 
@@ -104,7 +103,7 @@ public class HillClimber {
     //Create a list of neighbours from out current position
     public List<String> generateNeighbors(String currentNeighbor) {
         List<String> neighbors = new ArrayList<>();
-        String ALLCHARS = utils.returnAllCharacters();
+        String ALLCHARS = StringIndividualUtils.returnAllCharacters();
         Integer currentNeighborLength = currentNeighbor.length();
 
         for (int i = 0; i < neighborhoodSize; i++) {

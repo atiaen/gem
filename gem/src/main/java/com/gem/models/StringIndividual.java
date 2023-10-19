@@ -1,11 +1,13 @@
 package com.gem.models;
 
+import java.util.List;
+
 import com.gem.App;
 
 import lombok.Data;
 
 @Data
-public class Individual {
+public class StringIndividual {
     //What representation should be used for this individual
     Integer individualType;
     //If representation is 0 then value would be here
@@ -14,7 +16,6 @@ public class Individual {
     String individualString = "";
     //Calculated fitness of the individual will be reset eventually
     Float individualFitness = 0f;
-
     //For logging purposes only,used to print out details of an individual
     @Override
     public String toString() {
