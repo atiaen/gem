@@ -6,9 +6,10 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.Random;
 
+import com.gem.common.FilebasedGA;
 import com.gem.common.HillClimber;
 import com.gem.common.StringBasedGA;
-import com.gem.common.StringIndividualUtils;
+import com.gem.common.utils;
 
 public class App {
 
@@ -16,6 +17,7 @@ public class App {
   // if string based,pop size etc
   public static Properties appProps = new Properties();
   public static String target = "";
+  public static String fileName = "";
   public static Float targetScore = 0f;
   public static Integer populationSize = 0;
   public static Float evalScore = 0f;
@@ -36,6 +38,7 @@ public class App {
     String popSize = appProps.getProperty("ga_popluation_size");
     String gaCrossOverRate = appProps.getProperty("ga_crossover_rate");
     String gaMutationRate = appProps.getProperty("ga_mutation_rate");
+    String gaFileName = appProps.getProperty("ga_file_name");
 
     // Check gatype can be either string representaion or binary based
     // This section is if you want to use a GA within Gem
@@ -54,6 +57,17 @@ public class App {
       gBasedGA.runGA();
     }
 
+    if (gaType.equals("FileBased") && args.length == 0) {
+      populationSize = Integer.parseInt(popSize);
+      maxGenerations = Integer.parseInt(gaGenString);
+      crossOverRate = Float.parseFloat(gaCrossOverRate);
+      mutationRate = Float.parseFloat(gaMutationRate);
+      fileName = gaFileName;
+      
+      FilebasedGA filebasedGA = new FilebasedGA();
+      filebasedGA.run();
+    }
+
     // If you want to use a hill climber to compare results instead send in args
     if (args.length != 0 && args[0].equals("Hill") && !args[1].isEmpty()) {
       System.out.println("Testing for args");
@@ -67,12 +81,12 @@ public class App {
     if (args.length != 0 && args[0].equals("Random") && !args[1].isEmpty()) {
       target = App.appProps.getProperty("ga_target");
       Integer numberOfIterations = Integer.parseInt(args[1]);
-      String randomStart = StringIndividualUtils.generateRandomString(target.length());
-      String ALLCHARS = StringIndividualUtils.returnAllCharacters();
+      String randomStart = utils.generateRandomString(target.length());
+      String ALLCHARS = utils.returnAllCharacters();
       for (int i = 0; i < numberOfIterations; i++) {
         System.out.println("Solution:" + randomStart);
         System.out.println("Count:" + i);
-        
+
         Random ran = new Random();
         Integer index = ran.nextInt(target.length());
         if (randomStart.charAt(index) != target.charAt(index)) {
@@ -91,10 +105,10 @@ public class App {
         }
       }
     }
-  
-    long end = System.currentTimeMillis(); 
 
-    System.out.println("Elapsed Time in milli seconds: "+ (end-start));
+    long end = System.currentTimeMillis();
+
+    System.out.println("Elapsed Time in milli seconds: " + (end - start));
   }
 
 }

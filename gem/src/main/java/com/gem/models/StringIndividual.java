@@ -1,7 +1,5 @@
 package com.gem.models;
 
-import java.util.List;
-
 import com.gem.App;
 
 import lombok.Data;

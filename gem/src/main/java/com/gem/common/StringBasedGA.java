@@ -28,7 +28,7 @@ public class StringBasedGA {
     public void runGA() {
 
         // Generate population here
-        Population p = StringIndividualUtils.generateInitialPopulation();
+        Population p = utils.generateInitialPopulation();
 
         //How many generations have elapsed so far
         Integer generationCount = 0;
@@ -72,7 +72,7 @@ public class StringBasedGA {
 
             // If above conditions fail. Generate another population based on previous
             // population and set current population to new population.
-            Population offsPopulation = StringIndividualUtils.createNewGeneration(p);
+            Population offsPopulation = utils.createNewGeneration(p);
             p = offsPopulation;
 
         }

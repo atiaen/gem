@@ -82,7 +82,7 @@ public class HillClimber {
         Integer targetLength = target.length();
 
         //Generate a random string and set inital state to that string
-        this.currentState = StringIndividualUtils.generateRandomString(targetLength);
+        this.currentState = utils.generateRandomString(targetLength);
 
     }
 
@@ -103,7 +103,7 @@ public class HillClimber {
     //Create a list of neighbours from out current position
     public List<String> generateNeighbors(String currentNeighbor) {
         List<String> neighbors = new ArrayList<>();
-        String ALLCHARS = StringIndividualUtils.returnAllCharacters();
+        String ALLCHARS = utils.returnAllCharacters();
         Integer currentNeighborLength = currentNeighbor.length();
 
         for (int i = 0; i < neighborhoodSize; i++) {
