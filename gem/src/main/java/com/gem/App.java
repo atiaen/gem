@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.Random;
 
+import com.gem.common.FileHillClimber;
 import com.gem.common.FilebasedGA;
 import com.gem.common.HillClimber;
 import com.gem.common.StringBasedGA;
@@ -70,7 +71,6 @@ public class App {
 
     // If you want to use a hill climber to compare results instead send in args
     if (args.length != 0 && args[0].equals("Hill") && !args[1].isEmpty()) {
-      System.out.println("Testing for args");
       target = App.appProps.getProperty("ga_target");
       Integer neighborHoodSize = Integer.parseInt(args[1]);
       HillClimber climber = new HillClimber(gaType, target, neighborHoodSize);
@@ -106,6 +106,11 @@ public class App {
       }
     }
 
+    if(args.length != 0 && args[0].equals("FileHill") && !args[1].isEmpty()){
+      Integer neighborHoodSize = Integer.parseInt(args[1]);
+      FileHillClimber climber = new FileHillClimber(gaFileName, neighborHoodSize);
+      climber.doHillClimibing();
+    }
     long end = System.currentTimeMillis();
 
     System.out.println("Elapsed Time in milli seconds: " + (end - start));

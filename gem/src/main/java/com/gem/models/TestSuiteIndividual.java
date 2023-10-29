@@ -12,7 +12,7 @@ import lombok.Data;
 @Data
 public class TestSuiteIndividual {
     List<TestCase> testcases = new ArrayList<>();
-    // String suiteId = "";
+
     Float fitnessScore = 0f;
 
     @Override
@@ -32,15 +32,14 @@ public class TestSuiteIndividual {
         Float val = 0f;
 
         Float tfScore = 0f;
+        Integer faultsCount = testcases.get(0).getFaultsDetected().size();
 
-        for (int i = 0; i < 9; i++) {
+
+        for (int i = 0; i < faultsCount; i++) {
 
             for (int j = 0; j < testcases.size(); j++) {
 
                 TestCase testCase = testcases.get(j);
-
-                // String tcId = testCase.getTestCaseId();
-
                 List<String> faultsList = testCase.getFaultsDetected();
 
                 if (faultsList.get(i).equals("1")) {
@@ -59,7 +58,6 @@ public class TestSuiteIndividual {
 
         // System.out.println(testcases);
 
-        Integer faultsCount = testcases.get(0).getFaultsDetected().size();
         Integer faultsCountMultByTestCases = faultsCount * testcases.size();
 
         Float firstHalf = tfScore / faultsCountMultByTestCases;

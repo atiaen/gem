@@ -12,6 +12,11 @@ How to run Hill Climber
  - Same as GA only difference is adding Hill after `com.gem.App` and adding your neighbourhood size after
  - Target cli should look like this `java -cp target/gem-1.0.jar com.gem.App Hill 50`
 
+ How to run FileHill Climber
+ - Same as GA only difference is adding FileHill after `com.gem.App` and adding your neighbourhood size after
+ - Target cli should look like this `java -cp target/gem-1.0.jar com.gem.App FileHill 20`
+ - Make sure your file is inside the resources folder and that the file name is included in the application.properties
+
  How to run Random Solution
  - Same as Hill climber only difference is adding Random after `com.gem.App` and your number of iterations
  - Target cli should look like this `java -cp target/gem-1.0.jar com.gem.App Random 4500`
@@ -48,4 +53,4 @@ How to run Hill Climber
     ]
 }
 ```
- - Once that is done add `Hill` or `Random` as the first element in your `args` array and any whole number larger than 1 as the second element in your args array and run it.
+ - Once that is done add `Hill` or `Random` or `FileHill` as the first element in your `args` array and any whole number larger than 1 as the second element in your args array and run it.

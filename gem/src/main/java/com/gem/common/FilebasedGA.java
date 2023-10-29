@@ -67,7 +67,7 @@ public class FilebasedGA {
                 top3.add(fittesTestSuiteIndividual);
             }
 
-            if (top3.size() == 5) {
+            if (top3.size() == 3) {
                 System.out.println("Attempting to print file");
                 writeToFile(top3, genNames);
                 break;
@@ -342,7 +342,7 @@ public class FilebasedGA {
         // Path newFolder = Paths.get(source.toAbsolutePath() + "/generationLogs/");
         // Files.createDirectories(newFolder);
 
-        String fileName = LocalDateTime.now().toString() + "_logs";
+        String fileName = "GA_"+ LocalDateTime.now().toString() + "_logs";
 
         // Path path = Paths.get(fileName);
         // byte[] strToBytes = str.getBytes();
